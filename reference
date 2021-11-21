@@ -1,0 +1,65 @@
+parallelism
+https://hpc-tutorials.llnl.gov/posix
+https://hpc.llnl.gov/training/tutorials/introduction-parallel-computing-tutorial
+
+
+pthreads
+https://www.youtube.com/watch?v=uA8X5zNOGw8&ab_channel=JacobSorber
+https://www.youtube.com/watch?v=It0OFCbbTJE&ab_channel=JacobSorber
+https://www.youtube.com/watch?v=9axu8CUvOKY&ab_channel=JacobSorber
+
+
+dining philosophers
+https://fr.wikipedia.org/wiki/D%C3%AEner_des_philosophes
+https://fr.wikipedia.org/wiki/Interblocage
+
+https://www.developpez.net/forums/d1421697/c-cpp/c/multithreading-semaphore-diner-philosophes/
+https://h-deb.clg.qc.ca/Sujets/Parallelisme/Philosophes.html
+
+git sources
+https://github.com/Jean-xavierr/42Philosophers
+
+
+resolution
+https://jennycodes.me/posts/operating-system-the-dining-philosophers-problem
+https://github.com/ska42/philosophers/blob/master/srcs/philo_one/srcs/philosophers.c
+https://github.com/Jean-xavierr/42Philosophers/blob/master/srcs/philo_one/srcs/philosophers.c
+https://classes.cs.uchicago.edu/archive/2012/summer/51025-1/LABS/LAB5/DiningPhilosophers.pdf
+
+semaphores
+https://medium.com/swlh/the-dining-philosophers-problem-solution-in-c-90e2593f64e8
+
+use of gettimeoftheday
+https://linuxhint.com/gettimeofday_c_language/
+
+use top | grep philo_(nb) to proove no leaks
+(possible leak due to the return before join - impossible (?) due to lack of pthread functions and restriction (no comm between philos))
+
+
+void	*is_full(void *copy)
+{
+	t_copy		*cp;
+	t_philo		*philo;
+
+	cp = copy;
+	philo = cp->philo;
+	usleep(500);
+	pthread_mutex_lock(philo->m_display);
+	ft_putstr_fd("\nmeals->eaten", 1);
+	ft_putnbr_fd(cp->glo->meals_eaten, 1);
+	usleep(10);
+	pthread_mutex_unlock(philo->m_display);
+	return (NULL);
+}
+
+./philo_three 5 400 100 300 1
+
+
+
+./philo_one 5 800 300 300
+et
+./philo_one 5 800 300 300 1
+donnent des results differents
+
+script to kill zombie processes after ctrl+c on philo_three
+ps aux | grep philo_three | grep -v grep | tr -s ' ' | cut -d ' ' -f 2 | xargs -L1 kill -9
