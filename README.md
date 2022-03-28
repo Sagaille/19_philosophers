@@ -7,4 +7,4 @@ It was originally formulated in 1965 by Edsger Dijkstra.
 Solutions to this problem are given in 3 programs.
 First one with threads and mutexes.
 Second one with threads and semaphores.
-Third one is diff processes and mutexes.
+Third one is diff processes and semaphores.
